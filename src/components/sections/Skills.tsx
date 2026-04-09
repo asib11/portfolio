@@ -1,33 +1,75 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
-import { Code, Database, Globe, Layout, Server, Settings, Terminal, Cpu } from "lucide-react";
+import { Code, Database, Globe, Layout, Server, Settings, Terminal, Cpu, Blocks, Brain, Network, Workflow } from "lucide-react";
+import { SiPython, SiJavascript, SiCplusplus, SiDjango, SiExpress, SiReact, SiMysql, SiPostgresql, SiStripe, SiCelery, SiRedis, SiPostman, SiGithubactions, SiDocker, SiNginx, SiLinux, SiGit, SiGithub } from "react-icons/si";
+import { FaDatabase, FaServer, FaInfinity, FaWindows, FaAws } from "react-icons/fa";
+
+type SkillItem = {
+  name: string;
+  icon?: React.ReactNode;
+};
 
 const skillCategories = [
   {
     title: "Languages",
     icon: <Code size={24} className="text-blue-400" />,
-    skills: ["Python", "JavaScript", "SQL", "C++"],
+    skills: [
+      { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
+      { name: "JavaScript", icon: <SiJavascript className="text-[#F7DF1E] rounded-sm bg-black/10" /> },
+      { name: "SQL", icon: <FaDatabase className="text-[#4479A1]" /> },
+      { name: "C++", icon: <SiCplusplus className="text-[#00599C]" /> },
+    ] as SkillItem[],
   },
   {
     title: "Technologies",
     icon: <Database size={24} className="text-indigo-400" />,
-    skills: ["Django", "DRF", "Django Channel", "ExpressJS", "React", "MySQL", "PostgreSQL", "Stripe Webhook", "Celery", "Redis", "Postman"],
+    skills: [
+      { name: "Django", icon: <SiDjango className="text-[#092E20]" /> },
+      { name: "DRF", icon: <SiDjango className="text-[#092E20]" /> },
+      { name: "Django Channel", icon: <SiDjango className="text-[#092E20]" /> },
+      { name: "ExpressJS", icon: <SiExpress className="text-white" /> },
+      { name: "React", icon: <SiReact className="text-[#61DAFB]" /> },
+      { name: "MySQL", icon: <SiMysql className="text-[#4479A1]" /> },
+      { name: "PostgreSQL", icon: <SiPostgresql className="text-[#4169E1]" /> },
+      { name: "Stripe", icon: <SiStripe className="text-[#008CDD]" /> },
+      { name: "Celery", icon: <SiCelery className="text-[#37814A]" /> },
+      { name: "Redis", icon: <SiRedis className="text-[#DC382D]" /> },
+      { name: "Postman", icon: <SiPostman className="text-[#FF6C37]" /> },
+    ] as SkillItem[],
   },
   {
     title: "Server & DevOps",
     icon: <Server size={24} className="text-purple-400" />,
-    skills: ["CI/CD", "GitHub Actions", "Docker", "Nginx", "VPS", "AWS (EC2, S3, AMI)"],
+    skills: [
+      { name: "CI/CD", icon: <FaInfinity className="text-slate-400" /> },
+      { name: "GitHub Actions", icon: <SiGithubactions className="text-[#2088FF]" /> },
+      { name: "Docker", icon: <SiDocker className="text-[#2496ED]" /> },
+      { name: "Nginx", icon: <SiNginx className="text-[#009639]" /> },
+      { name: "VPS", icon: <FaServer className="text-slate-400" /> },
+      { name: "AWS", icon: <FaAws className="text-[#232F3E]" /> },
+    ] as SkillItem[],
   },
   {
     title: "Core Concepts",
     icon: <Cpu size={24} className="text-teal-400" />,
-    skills: ["OOP", "Data Structures", "Algorithms", "Problem Solving"],
+    skills: [
+      { name: "OOP", icon: <Blocks className="text-orange-400" size={16} /> },
+      { name: "Data Structures", icon: <Network className="text-blue-400" size={16} /> },
+      { name: "Algorithms", icon: <Workflow className="text-green-400" size={16} /> },
+      { name: "Problem Solving", icon: <Brain className="text-pink-400" size={16} /> },
+    ] as SkillItem[],
   },
   {
     title: "Tools & OS",
     icon: <Terminal size={24} className="text-cyan-400" />,
-    skills: ["Linux", "Windows", "Git", "GitHub"],
+    skills: [
+      { name: "Linux", icon: <SiLinux className="text-white" /> },
+      { name: "Windows", icon: <FaWindows className="text-[#0078D6]" /> },
+      { name: "Git", icon: <SiGit className="text-[#F05032]" /> },
+      { name: "GitHub", icon: <SiGithub className="text-white" /> },
+    ] as SkillItem[],
   },
 ];
 
@@ -53,9 +95,9 @@ export default function Skills() {
       <div className="absolute top-[30%] left-[-10%] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] -z-10 mix-blend-screen pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-12 z-10">
-        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-16">
+        <div className="flex flex-col items-center justify-center text-center gap-4 mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Technical Skills</h2>
-          <div className="h-[1px] w-full bg-gradient-to-r from-blue-500/50 to-transparent mt-2 md:mt-0"></div>
+          <div className="h-[2px] w-24 bg-blue-500/50 mt-2 md:mt-0 rounded-full"></div>
         </div>
 
         <motion.div
@@ -80,12 +122,14 @@ export default function Skills() {
               
               <div className="flex flex-wrap gap-2.5">
                 {category.skills.map((skill, skillIdx) => (
-                  <span 
+                  <div 
                     key={skillIdx}
-                    className="px-3 py-1.5 bg-slate-900/50 text-slate-300 text-sm font-medium rounded-lg border border-slate-700/50 group-hover:border-slate-600 transition-colors duration-300"
+                    className="flex items-center gap-2 px-3 py-2 bg-slate-900/60 hover:bg-slate-800 text-slate-300 text-sm font-medium rounded-lg border border-slate-700/50 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-indigo-500/10 cursor-default"
+                    title={skill.name}
                   >
-                    {skill}
-                  </span>
+                    {skill.icon && <span className="text-lg drop-shadow-md">{skill.icon}</span>}
+                    <span className="tracking-wide hidden sm:block">{skill.name}</span>
+                  </div>
                 ))}
               </div>
             </motion.div>
