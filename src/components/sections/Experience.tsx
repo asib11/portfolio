@@ -27,13 +27,13 @@ export default function Experience() {
       <div className="absolute top-[50%] right-[-10%] w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-12 z-10">
-        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-20">
+        <div className="flex flex-col items-center justify-center text-center gap-4 mb-20">
           <h2 className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Experience</h2>
-          <div className="h-[1px] w-full bg-gradient-to-r from-indigo-500/50 to-transparent mt-2 md:mt-0"></div>
+          <div className="h-[2px] w-24 bg-indigo-500/50 mt-2 md:mt-0 rounded-full"></div>
         </div>
 
-        <div className="max-w-4xl mx-auto md:mr-auto md:ml-2">
-          <div className="relative border-l-2 border-slate-700/50 ml-4 md:ml-0 md:space-y-16 space-y-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative border-l-2 border-slate-700/50 ml-4 md:ml-6 md:space-y-16 space-y-12">
             {experiences.map((exp, idx) => (
               <motion.div
                 key={idx}

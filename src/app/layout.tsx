@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import ParticleExplosion from "@/components/ui/ParticleExplosion";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased text-foreground bg-background min-h-screen flex flex-col`}
       >
+        <ParticleExplosion />
         <Navbar />
         <main className="flex-grow w-full">
           {children}
