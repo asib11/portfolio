@@ -1,18 +1,135 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { ArrowRight, FileText, Github, Linkedin, MapPin, Mail, Phone, Code2 } from "lucide-react";
+import { Orbitron } from "next/font/google";
+
+const futuristicFont = Orbitron({ subsets: ["latin"], weight: ["400", "500", "700", "900"] });
+
+const ROLES = [
+  "Software Engineer",
+  "Backend Developer",
+  "Full-Stack Developer",
+  "Python Developer",
+  "Go Developer"
+];
+
+const PHRASES = [
+  "Passionate about building robust backend systems, scalable APIs, and seamless full-stack applications.",
+  "Turning complex problems into elegant, user-friendly digital experiences.",
+  "Creating high-performance web solutions with clean code and modern architecture."
+];
+
+const CODE_SNIPPETS = [
+  {
+    language: "python",
+    code: `from django.urls import path
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def get_user_data(request):
+    return Response({
+        "status": "success",
+        "framework": "Django REST",
+        "message": "Building scalable applications"
+    })
+`
+  },
+  {
+    language: "go",
+    code: `package main
+
+import "fmt"
+
+func main() {
+    message := "High-performance services"
+    fmt.Println("Building: " + message)
+    
+    // Concurrent processing
+    go processData()
+}
+`
+  },
+  {
+    language: "javascript",
+    code: `async function fetchData() {
+  try {
+    const res = await fetch('/api/data');
+    const data = await res.json();
+    return data.map(item => ({
+      ...item,
+      processed: true
+    }));
+  } catch (error) {
+    console.error(error);
+  }
+}
+`
+  }
+];
+
+const CODE_PHRASES = CODE_SNIPPETS.map((s) => s.code);
+
+function useTypewriter(phrases: string[], typeSpeed = 50, deleteSpeed = 30, delay = 2000) {
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(typeSpeed);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    const currentPhrase = phrases[loopNum % phrases.length];
+
+    if (isDeleting) {
+      if (text === '') {
+        setIsDeleting(false);
+        setLoopNum((prev) => prev + 1);
+        setTypingSpeed(typeSpeed);
+      } else {
+        timer = setTimeout(() => {
+          setText((prev) => prev.slice(0, -1));
+        }, deleteSpeed);
+      }
+    } else {
+      if (text === currentPhrase) {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, delay);
+      } else {
+        timer = setTimeout(() => {
+          setText((prev) => currentPhrase.slice(0, prev.length + 1));
+        }, typingSpeed);
+      }
+    }
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, phrases, loopNum, typingSpeed, typeSpeed, deleteSpeed, delay]);
+
+  return { text, index: loopNum % phrases.length };
+}
 
 export default function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const { text: typedText } = useTypewriter(PHRASES);
+  const { text: typedCode, index: codeIndex } = useTypewriter(CODE_PHRASES, 20, 10, 3000);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % ROLES.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
   return (
-    <section id="hero" className="min-h-screen flex items-center pt-28 pb-20 relative overflow-hidden">
+    <section id="hero" className={`min-h-screen flex items-center pt-28 pb-20 relative overflow-hidden ${futuristicFont.className}`}>
       {/* Background decoration */}
       <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] -z-10 mix-blend-screen pointer-events-none"></div>
       <div className="absolute bottom-[10%] right-[10%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none"></div>
       
       <div className="container mx-auto px-6 lg:px-12 z-10">
-        <div className="max-w-4xl">
-          <motion.div
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-2xl">
+            <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -28,26 +145,40 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tighter text-white mb-4 drop-shadow-lg"
           >
-            ASIB <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">AHMED</span>
+            ASIB AHMED
           </motion.h1>
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl md:text-4xl font-semibold text-slate-300 mb-8 flex items-center gap-3"
+            className="text-2xl md:text-4xl font-semibold text-slate-300 mb-8 flex items-center gap-3 h-10 md:h-12"
           >
             <Code2 className="text-blue-400 hidden sm:block" size={32} />
-            Software Engineer
+            <div className="relative overflow-hidden flex-1 h-full flex items-center">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={roleIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute whitespace-nowrap"
+                >
+                  {ROLES[roleIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </div>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl mb-10"
+            className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl mb-10 h-24 md:h-16"
           >
-            Passionate about building robust backend systems, scalable APIs, and seamless full-stack applications.
+            {typedText}
+            <span className="animate-pulse inline-block w-[3px] h-5 bg-blue-400 ml-1 align-middle"></span>
           </motion.p>
 
           <motion.div
@@ -94,6 +225,48 @@ export default function Hero() {
               <div className="flex items-center gap-2 text-slate-400">
                 <Phone size={16} className="text-blue-400" />
                 <a href="tel:+8801753249719" className="text-sm hover:text-white transition-colors">+88 01753 249719</a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="hidden lg:block relative group font-mono"
+          >
+            <div className="relative rounded-xl bg-transparent border border-blue-500/40 overflow-hidden shadow-[0_0_20px_rgba(59,130,246,0.15)] group-hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-shadow duration-500 h-[400px] flex flex-col">
+              {/* Sci-fi Header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-blue-500/20 bg-transparent">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-400 animate-pulse"></div>
+                  <div className="w-12 h-1 bg-blue-500/50"></div>
+                  <div className="w-4 h-1 bg-blue-500/30"></div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-blue-300 font-bold tracking-[0.2em] uppercase glow">
+                    SYS.{CODE_SNIPPETS[codeIndex].language}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 bg-indigo-500/50"></div>
+                  <div className="w-1.5 h-1.5 bg-indigo-500/50"></div>
+                  <div className="w-1.5 h-1.5 bg-indigo-500/50"></div>
+                </div>
+              </div>
+              
+              {/* Code body */}
+              <div className="p-6 flex-1 overflow-hidden relative">
+                {/* Scanline effect */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent h-[200%] animate-scan pointer-events-none"></div>
+                
+                <pre className="text-sm md:text-base text-blue-400/90 whitespace-pre-wrap leading-relaxed relative z-10">
+                  <code>
+                    {typedCode}
+                    <span className="animate-pulse inline-block w-2 h-4 bg-blue-400 ml-1 shadow-[0_0_8px_#60a5fa]"></span>
+                  </code>
+                </pre>
               </div>
             </div>
           </motion.div>
