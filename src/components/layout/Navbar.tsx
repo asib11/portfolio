@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -56,6 +56,15 @@ export default function Navbar() {
             </Link>
           ))}
           <a
+            href="https://www.overleaf.com/download/project/68b4879932e777a14bbc3f50/build/19d84dfe923-1b861a698c03d13d/output/output.pdf?compileGroup=standard&clsiserverid=clsi-pre-emp-c3d-c-f-mpks&enable_pdf_caching=true&popupDownload=true&editorId=f61fe3b6-06f2-4d15-9ff8-cb1727a53cfe"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors relative group ml-2 flex items-center gap-1.5"
+          >
+            Resume <Download size={14} />
+            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all group-hover:w-full"></span>
+          </a>
+          <a
             href="mailto:asib.bubt@gmail.com"
             className="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-all shadow-md shadow-blue-600/20 hover:shadow-blue-500/40 hover:-translate-y-0.5"
           >
@@ -91,6 +100,15 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <a
+              href="https://www.overleaf.com/download/project/68b4879932e777a14bbc3f50/build/19d84dfe923-1b861a698c03d13d/output/output.pdf?compileGroup=standard&clsiserverid=clsi-pre-emp-c3d-c-f-mpks&enable_pdf_caching=true&popupDownload=true&editorId=f61fe3b6-06f2-4d15-9ff8-cb1727a53cfe"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1.5"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Resume <Download size={14} />
+            </a>
             <a
               href="mailto:asib.bubt@gmail.com"
               className="w-full text-center px-5 py-3 rounded-md bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors mt-2"
