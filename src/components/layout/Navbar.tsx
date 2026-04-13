@@ -39,8 +39,8 @@ export default function Navbar() {
       )}
     >
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold tracking-tighter text-white">
-          ASIB <span className="text-blue-500">AHMED</span>
+        <Link href="/" className="text-3xl md:text-4xl font-signature text-white drop-shadow-md hover:text-blue-400 transition-colors tracking-wider">
+          Asib Ahmed
         </Link>
 
         {/* Desktop Nav */}
