@@ -2,17 +2,19 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ArrowRight, FileText, Github, Linkedin, MapPin, Mail, Phone, Code2 } from "lucide-react";
+import { ArrowRight, FileText, Github, Linkedin, MapPin, Mail, Phone } from "lucide-react";
+import { FaCode, FaServer, FaLayerGroup, FaPython } from "react-icons/fa";
+import { SiGo } from "react-icons/si";
 import { Orbitron } from "next/font/google";
 
 const futuristicFont = Orbitron({ subsets: ["latin"], weight: ["400", "500", "700", "900"] });
 
 const ROLES = [
-  "Software Engineer",
-  "Backend Developer",
-  "Full-Stack Developer",
-  "Python Developer",
-  "Go Developer"
+  { title: "Software Engineer", icon: FaCode },
+  { title: "Backend Engineer", icon: FaServer },
+  { title: "Full-Stack Developer", icon: FaLayerGroup },
+  { title: "Python Developer", icon: FaPython },
+  { title: "Go Developer", icon: SiGo }
 ];
 
 const PHRASES = [
@@ -152,9 +154,8 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl md:text-4xl font-semibold text-slate-300 mb-8 flex items-center gap-3 h-10 md:h-12"
+            className="text-2xl md:text-4xl font-semibold text-slate-300 mb-8 flex items-center h-10 md:h-12"
           >
-            <Code2 className="text-blue-400 hidden sm:block" size={32} />
             <div className="relative overflow-hidden flex-1 h-full flex items-center">
               <AnimatePresence mode="wait">
                 <motion.span
@@ -163,9 +164,13 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute whitespace-nowrap"
+                  className="absolute whitespace-nowrap flex items-center gap-3"
                 >
-                  {ROLES[roleIndex]}
+                  {(() => {
+                    const Icon = ROLES[roleIndex].icon;
+                    return <Icon className="text-blue-400 hidden sm:block" size={32} />;
+                  })()}
+                  {ROLES[roleIndex].title}
                 </motion.span>
               </AnimatePresence>
             </div>
