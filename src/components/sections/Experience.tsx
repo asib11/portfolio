@@ -14,8 +14,8 @@ const experiences = [
   {
     company: "Coderize IT Solution",
     role: "Jr. Software Engineer",
-    location: "Shawrapara, Dhaka",
-    date: "Aug 2024 – June 2025",
+    location: "Mirpur, Dhaka",
+    date: "Aug 2023 – June 2025",
     description: "Developed full-stack apps using React.js (frontend) and DRF (backend), integrating RESTful APIs for seamless data interaction. Optimized MySQL/PostgreSQL models, designed responsive UIs with Tailwind CSS, and deployed apps with Docker and Nginx for scalability and production readiness.",
   }
 ];
@@ -24,7 +24,7 @@ export default function Experience() {
   return (
     <section id="experience" className="py-24 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-[50%] right-[-10%] w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none"></div>
+      <div className="absolute top-[50%] right-[-10%] w-[600px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-12 z-10">
         <div className="flex flex-col items-center justify-center text-center gap-4 mb-20">
@@ -69,7 +69,7 @@ export default function Experience() {
                     </div>
                   </div>
                   
-                  <p className="text-slate-400 leading-relaxed text-base md:text-lg">
+                  <p className="text-slate-400 leading-relaxed text-base md:text-lg text-justify">
                     {exp.description}
                   </p>
                 </div>

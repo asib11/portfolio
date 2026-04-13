@@ -72,7 +72,7 @@ export default function Projects() {
                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">{project.title}</h3>
                 
                 <div className={`bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 md:p-8 shadow-2xl text-slate-300 leading-relaxed z-10 relative ${idx % 2 === 0 ? 'md:-ml-12' : 'md:-mr-12'} hover:border-slate-500/50 transition-all duration-300 hover:shadow-blue-500/10 hover:-translate-y-1`}>
-                  <p>{project.description}</p>
+                  <p className="text-justify">{project.description}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-8">
