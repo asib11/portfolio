@@ -11,7 +11,7 @@
   --color-accent-foreground: #ffffff;
   --color-card: rgba(30, 41, 59, 0.5);
   --color-card-border: rgba(255, 255, 255, 0.05);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-sans);
   --font-signature: var(--font-signature);
 }
 

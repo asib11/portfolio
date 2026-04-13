@@ -50,9 +50,6 @@ export default function Footer() {
         
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
           <p>© {currentYear} Asib Ahmed. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Built with Next.js & Tailwind CSS
-          </p>
         </div>
       </div>
     </footer>

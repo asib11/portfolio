@@ -5,9 +5,10 @@ import { useState, useEffect } from "react";
 import { ArrowRight, FileText, Github, Linkedin, MapPin, Mail, Phone } from "lucide-react";
 import { FaCode, FaServer, FaLayerGroup, FaPython } from "react-icons/fa";
 import { SiGo } from "react-icons/si";
-import { Orbitron } from "next/font/google";
+import { Orbitron, Fira_Code } from "next/font/google";
 
 const futuristicFont = Orbitron({ subsets: ["latin"], weight: ["400", "500", "700", "900"] });
+const firaCode = Fira_Code({ subsets: ["latin"], weight: ["400", "500"] });
 
 const ROLES = [
   { title: "Software Engineer", icon: FaCode },
@@ -247,9 +248,9 @@ export default function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="hidden lg:block relative group font-mono"
+            className={`hidden lg:block relative group ${firaCode.className}`}
           >
-            <div className="relative rounded-xl bg-transparent border border-blue-500/40 overflow-hidden shadow-[0_0_20px_rgba(59,130,246,0.15)] group-hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-shadow duration-500 h-[400px] flex flex-col">
+            <div className="relative rounded-xl bg-transparent border border-blue-500/40 overflow-hidden shadow-[0_0_20px_rgba(59,130,246,0.15)] group-hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-shadow duration-500 h-[500px] flex flex-col">
               {/* Sci-fi Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-blue-500/20 bg-transparent">
                 <div className="flex items-center gap-2">
@@ -274,8 +275,8 @@ export default function Hero() {
                 {/* Scanline effect */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent h-[200%] animate-scan pointer-events-none"></div>
                 
-                <pre className="text-sm md:text-base text-blue-400/90 whitespace-pre-wrap leading-relaxed relative z-10">
-                  <code>
+                <pre className={`text-sm md:text-base text-blue-400/90 whitespace-pre-wrap leading-relaxed relative z-10 ${firaCode.className}`}>
+                  <code className={firaCode.className}>
                     {typedCode}
                     <span className="animate-pulse inline-block w-2 h-4 bg-blue-400 ml-1 shadow-[0_0_8px_#60a5fa]"></span>
                   </code>
