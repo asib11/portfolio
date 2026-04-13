@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
           <div className="flex flex-col gap-6">
             <h2 className="text-3xl font-bold text-white">Let's Connect</h2>
-            <p className="text-slate-400 max-w-md leading-relaxed">
+            <p className="text-slate-400 max-w-md leading-relaxed text-justify">
               I'm currently looking for new opportunities as a Software Engineer. Whether you have a question or just want to say hi, I'll try my best to get back to you!
             </p>
             <a 
