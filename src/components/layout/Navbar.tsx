@@ -66,7 +66,7 @@ export default function Navbar() {
             <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-500 transition-all group-hover:w-full"></span>
           </a>
           <a
-            href="mailto:asib.bubt@gmail.com"
+            href="#contact"
             className="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-all shadow-md shadow-blue-600/20 hover:shadow-blue-500/40 hover:-translate-y-0.5"
           >
             Contact Me
@@ -111,7 +111,7 @@ export default function Navbar() {
               Resume <Download size={14} />
             </a>
             <a
-              href="mailto:asib.bubt@gmail.com"
+              href="#contact"
               className="w-full text-center px-5 py-3 rounded-md bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors mt-2"
               onClick={() => setMobileMenuOpen(false)}
             >
