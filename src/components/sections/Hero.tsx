@@ -124,7 +124,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <section id="hero" className={`min-h-screen flex items-center pt-28 pb-20 relative overflow-hidden ${futuristicFont.className}`}>
+    <section id="hero" aria-label="Hero Introduction" className={`min-h-screen flex items-center pt-28 pb-20 relative overflow-hidden ${futuristicFont.className}`}>
       {/* Background decoration */}
       <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] -z-10 mix-blend-screen pointer-events-none"></div>
       <div className="absolute bottom-[10%] right-[10%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none"></div>

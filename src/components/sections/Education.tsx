@@ -5,13 +5,13 @@ import { GraduationCap, Calendar, Award } from "lucide-react";
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 relative overflow-hidden">
+    <section id="education" aria-labelledby="education-heading" className="py-24 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-[30%] left-[-10%] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] -z-10 mix-blend-screen pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-12 z-10">
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-20">
-          <h2 className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Education</h2>
+          <h2 id="education-heading" className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Education</h2>
           <div className="h-[1px] w-full bg-gradient-to-r from-purple-500/50 to-transparent mt-2 md:mt-0"></div>
         </div>
 

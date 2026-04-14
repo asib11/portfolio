@@ -4,7 +4,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer id="contact" className="bg-slate-950 border-t border-white/5 pt-16 pb-8 relative overflow-hidden">
+    <footer id="contact" aria-label="Contact Information" className="bg-slate-950 border-t border-white/5 pt-16 pb-8 relative overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
           <div className="flex flex-col gap-6">
@@ -49,7 +49,9 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-          <p>© {currentYear} Asib Ahmed. All rights reserved.</p>
+          <p>© {currentYear} <span className="text-xl font-signature text-white drop-shadow-md hover:text-blue-400 transition-colors tracking-wider">
+                    Asib Ahmed
+                  </span>. All rights reserved.</p>
         </div>
       </div>
     </footer>

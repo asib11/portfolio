@@ -38,10 +38,10 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 relative bg-slate-900/30 border-y border-white/5">
+    <section id="projects" aria-labelledby="projects-heading" className="py-24 relative bg-slate-900/30 border-y border-white/5">
       <div className="container mx-auto px-6 lg:px-12 z-10">
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-20">
-          <h2 className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Featured Projects</h2>
+          <h2 id="projects-heading" className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Featured Projects</h2>
           <div className="h-[1px] w-full bg-gradient-to-r from-blue-500/50 to-transparent mt-2 md:mt-0"></div>
         </div>
 

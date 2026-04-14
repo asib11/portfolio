@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 relative">
+    <section id="about" aria-labelledby="about-heading" className="py-24 relative">
       <div className="container mx-auto px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -14,7 +14,7 @@ export default function About() {
           className="max-w-4xl mx-auto"
         >
           <div className="flex items-center gap-4 mb-8">
-            <h2 className="text-3xl md:text-5xl font-bold text-white">About Me</h2>
+            <h2 id="about-heading" className="text-3xl md:text-5xl font-bold text-white">About Me</h2>
             <div className="h-[1px] flex-grow bg-slate-700 mt-2"></div>
           </div>
           

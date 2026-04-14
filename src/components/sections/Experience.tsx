@@ -22,13 +22,13 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 relative overflow-hidden">
+    <section id="experience" aria-labelledby="experience-heading" className="py-24 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-[50%] right-[-10%] w-[600px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-12 z-10">
         <div className="flex flex-col items-center justify-center text-center gap-4 mb-20">
-          <h2 className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Experience</h2>
+          <h2 id="experience-heading" className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Experience</h2>
           <div className="h-[2px] w-24 bg-indigo-500/50 mt-2 md:mt-0 rounded-full"></div>
         </div>
 

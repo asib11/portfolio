@@ -90,13 +90,13 @@ const itemVariants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 relative bg-slate-900/30 border-y border-white/5">
+    <section id="skills" aria-labelledby="skills-heading" className="py-24 relative bg-slate-900/30 border-y border-white/5">
       {/* Decorative blobs */}
       <div className="absolute top-[30%] left-[-10%] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] -z-10 mix-blend-screen pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-12 z-10">
         <div className="flex flex-col items-center justify-center text-center gap-4 mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Technical Skills</h2>
+          <h2 id="skills-heading" className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Technical Skills</h2>
           <div className="h-[2px] w-24 bg-blue-500/50 mt-2 md:mt-0 rounded-full"></div>
         </div>
 
