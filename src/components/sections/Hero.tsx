@@ -2,8 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ArrowRight, FileText, Github, Linkedin, MapPin, Mail, Phone } from "lucide-react";
-import { FaCode, FaServer, FaLayerGroup, FaPython } from "react-icons/fa";
+import { ArrowRight, FileText, Github, Linkedin, MapPin, Mail, Phone, Facebook } from "lucide-react";
+import { FaCode, FaServer, FaLayerGroup, FaPython, FaWhatsapp } from "react-icons/fa";
 import { SiGo } from "react-icons/si";
 import { Orbitron, Fira_Code } from "next/font/google";
 
@@ -228,6 +228,24 @@ export default function Hero() {
               </a>
               <a href="https://linkedin.com/in/asib" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-400 transition-colors p-3 bg-slate-800/50 rounded-full hover:bg-slate-700 border border-white/5 hover:border-white/10" aria-label="LinkedIn">
                 <Linkedin size={20} />
+              </a>
+              <a
+                href="https://facebook.com/asibahmed11"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="text-slate-400 hover:text-[#1877F2] transition-colors p-3 bg-slate-800/50 rounded-full hover:bg-slate-700 border border-white/5 hover:border-white/10"
+              >
+                <Facebook size={20} />
+              </a>
+              <a
+                href="https://wa.me/8801753249719"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="text-slate-400 hover:text-[#25D366] transition-colors p-3 bg-slate-800/50 rounded-full hover:bg-slate-700 border border-white/5 hover:border-white/10"
+              >
+                <FaWhatsapp size={20} />
               </a>
             </div>
             

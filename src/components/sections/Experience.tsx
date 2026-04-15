@@ -17,6 +17,13 @@ const experiences = [
     location: "Mirpur, Dhaka",
     date: "Aug 2023 – June 2025",
     description: "Developed full-stack apps using React.js (frontend) and DRF (backend), integrating RESTful APIs for seamless data interaction. Optimized MySQL/PostgreSQL models, designed responsive UIs with Tailwind CSS, and deployed apps with Docker and Nginx for scalability and production readiness.",
+  },
+  {
+    company: "ICT Division - SRSoF Project",
+    role: "Python Instructor",
+    location: "Kushtia & Chuadanga",
+    date: "Jan 2023 – July 2023",
+    description: "Taught Python and SQL programming to students, covering fundamentals, data structures, algorithms, database, and best practices. Developed and delivered course materials, conducted hands-on labs, and provided mentorship to help students build their programming skills.",
   }
 ];
 

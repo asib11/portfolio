@@ -10,8 +10,8 @@ const projects = [
     tools: ["Django", "Django Channel", "Qdrant Vector Database", "Custom Generative AI", "Stripe", "Celery", "Redis", "Docker", "PostgreSQL", "Bash Script", "Nginx", "VPS"],
     repo: "private repo",
     links: [
-      { name: "Live Link", url: "#" },
-      { name: "Dashboard Live Link", url: "#" }
+      { name: "Live Link", url: "https://wiiz.ai" },
+      { name: "Dashboard Live Link", url: "https://dashboard.wiiz.ai" }
     ],
     imageGradient: "from-blue-600/40 to-cyan-500/40"
   },
@@ -31,7 +31,10 @@ const projects = [
     description: "A platform integrating vacation homes, car rentals, and activities, with real-time booking, Stripe payment processing, and secure guest verification. It follows strict UX standards and includes a CI/CD pipeline, with future features like an owner portal and ongoing post-launch support.",
     tools: ["DRF", "API Webhook", "Stripe", "PostgreSQL", "Docker", "Nginx", "AWS (EC2, S3)"],
     repo: "private repo",
-    links: [],
+    links: [
+      { name: "Live Link", url: "https://portavacation.co" },
+      
+    ],
     imageGradient: "from-teal-600/40 to-emerald-500/40"
   }
 ];
