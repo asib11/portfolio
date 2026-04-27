@@ -9,6 +9,10 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=production
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=qwen2.5:3b
+    depends_on:
+      - ollama
     networks:
       - default
 
@@ -29,8 +33,36 @@ services:
       - default
       - global-proxy-net
 
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_portfolio
+    restart: unless-stopped
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - default
+    # Pull the chat model on first startup (internal port 11434 only).
+    # qwen2.5:3b: fast chat model (~1.9 GB) — only model needed.
+    entrypoint: >
+      /bin/sh -c "
+        ollama serve &
+        SERVE_PID=$$!;
+        echo '[ollama] Waiting for server to be ready...';
+        sleep 8;
+        echo '[ollama] Pulling qwen2.5:3b...';
+        ollama pull qwen2.5:3b;
+        echo '[ollama] Pre-warming model into RAM...';
+        ollama run qwen2.5:3b 'ping' || true;
+        echo '[ollama] Model warm and ready.';
+        wait $$SERVE_PID
+      "
+
 networks:
   default:
     driver: bridge
   global-proxy-net:
     external: true
+
+volumes:
+  ollama_data:
+    driver: local

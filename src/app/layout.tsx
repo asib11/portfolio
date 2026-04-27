@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import ParticleExplosion from "@/components/ui/ParticleExplosion";
 import JsonLd from "@/components/seo/JsonLd";
+import ChatWidget from "@/components/ui/ChatWidget";
 
 const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600", "700"],
@@ -108,6 +109,7 @@ export default function RootLayout({
         <main className="flex-grow w-full">
           {children}
         </main>
+        <ChatWidget />
       </body>
     </html>
   );
