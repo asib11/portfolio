@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code, Database, Globe, Layout, Server, Settings, Terminal, Cpu, Blocks, Brain, Network, Workflow } from "lucide-react";
-import { SiPython, SiJavascript, SiCplusplus, SiDjango, SiExpress, SiReact, SiMysql, SiPostgresql, SiStripe, SiCelery, SiRedis, SiPostman, SiGithubactions, SiDocker, SiNginx, SiLinux, SiGit, SiGithub } from "react-icons/si";
+import { SiPython, SiJavascript, SiCplusplus, SiDjango, SiExpress, SiReact, SiMysql, SiPostgresql, SiStripe, SiCelery, SiRedis, SiPostman, SiGithubactions, SiDocker, SiNginx, SiLinux, SiGit, SiGithub, SiTypescript, SiGo } from "react-icons/si";
 import { FaDatabase, FaServer, FaInfinity, FaWindows, FaAws } from "react-icons/fa";
 
 type SkillItem = {
@@ -17,9 +17,11 @@ const skillCategories = [
     icon: <Code size={24} className="text-blue-400" />,
     skills: [
       { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
+      { name: "Go", icon: <SiGo className="text-[#00599C]" /> },
+      { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
       { name: "JavaScript", icon: <SiJavascript className="text-[#F7DF1E] rounded-sm bg-black/10" /> },
-      { name: "SQL", icon: <FaDatabase className="text-[#4479A1]" /> },
       { name: "C++", icon: <SiCplusplus className="text-[#00599C]" /> },
+      { name: "SQL", icon: <FaDatabase className="text-[#4479A1]" /> },
     ] as SkillItem[],
   },
   {
