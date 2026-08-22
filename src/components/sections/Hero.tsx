@@ -200,7 +200,7 @@ export default function Hero() {
               View My Work <ArrowRight size={18} />
             </a>
             <a 
-              href="https://www.overleaf.com/download/project/68b4879932e777a14bbc3f50/build/19d84dfe923-1b861a698c03d13d/output/output.pdf?compileGroup=standard&clsiserverid=clsi-pre-emp-c3d-c-f-mpks&enable_pdf_caching=true&popupDownload=true&editorId=f61fe3b6-06f2-4d15-9ff8-cb1727a53cfe"
+              href="https://www.overleaf.com/read/xkfhknkprdyb#9e3129"
               target="_blank"
               rel="noreferrer noopener"
               className="px-8 py-4 rounded-full bg-slate-800/80 hover:bg-slate-700 backdrop-blur-md text-white font-medium flex items-center gap-2 transition-all border border-slate-700/50 hover:border-slate-500"

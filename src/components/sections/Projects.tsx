@@ -1,7 +1,10 @@
 "use client";
 
+import React, { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Code2, Layers } from "lucide-react";
+import { ExternalLink, Github, Code2, Layers, ChevronLeft, ChevronRight } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 const projects = [
   {
@@ -40,73 +43,139 @@ const projects = [
 ];
 
 export default function Projects() {
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "center", skipSnaps: false },
+    [Autoplay({ delay: 6000, stopOnInteraction: true })]
+  );
+  
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi, setSelectedIndex]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+  }, [emblaApi, onSelect]);
+
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="py-24 relative bg-slate-900/30 border-y border-white/5">
+    <section id="projects" aria-labelledby="projects-heading" className="py-24 relative bg-slate-900/30 border-y border-white/5 overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12 z-10">
-        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-20">
-          <h2 id="projects-heading" className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Featured Projects</h2>
-          <div className="h-[1px] w-full bg-gradient-to-r from-blue-500/50 to-transparent mt-2 md:mt-0"></div>
-        </div>
-
-        <div className="flex flex-col gap-16 md:gap-32">
-          {projects.map((project, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className={`group flex flex-col ${idx % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 lg:gap-16 items-center`}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-16">
+          <div className="flex items-center gap-4 w-full md:w-auto">
+            <h2 id="projects-heading" className="text-3xl md:text-5xl font-bold text-white whitespace-nowrap">Featured Projects</h2>
+            <div className="hidden md:block h-[1px] w-32 bg-gradient-to-r from-blue-500/50 to-transparent"></div>
+          </div>
+          
+          {/* Navigation Controls */}
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={scrollPrev}
+              className="p-3 rounded-full bg-slate-800/50 border border-white/10 text-white hover:bg-blue-600 hover:border-blue-500 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+              aria-label="Previous project"
             >
-              {/* Project Image Placeholder */}
-              <div className={`w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden relative shadow-2xl bg-gradient-to-br ${project.imageGradient} border border-white/10 flex items-center justify-center p-8`}>
-                 <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors duration-500"></div>
-                 <Code2 size={80} className="text-white/50 group-hover:scale-110 group-hover:text-white transition-all duration-500 relative z-10" />
-                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-2xl transition-colors duration-500 z-20 pointer-events-none"></div>
-              </div>
-
-              {/* Project Content */}
-              <div className="w-full md:w-1/2 flex flex-col">
-                <div className="flex items-center gap-2 text-blue-400 font-medium mb-3 tracking-wide uppercase text-sm">
-                  <Layers size={16} />
-                  <span>Full Stack Application</span>
-                </div>
-                
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">{project.title}</h3>
-                
-                <div className={`bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 md:p-8 shadow-2xl text-slate-300 leading-relaxed z-10 relative ${idx % 2 === 0 ? 'md:-ml-12' : 'md:-mr-12'} hover:border-slate-500/50 transition-all duration-300 hover:shadow-blue-500/10 hover:-translate-y-1`}>
-                  <p className="text-justify">{project.description}</p>
-                </div>
-
-                <div className="flex flex-wrap gap-2 mt-8">
-                  {project.tools.map((tool, tIdx) => (
-                    <span key={tIdx} className="text-sm font-medium text-slate-300 font-mono bg-slate-900/80 px-3 py-1.5 rounded-md border border-slate-700/50 hover:border-slate-500 transition-colors">
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap items-center gap-6 mt-8">
-                  {project.repo === "private repo" ? (
-                    <span className="flex items-center gap-2 text-slate-500 text-sm font-medium cursor-not-allowed" title="Private Repository">
-                      <Github size={20} /> Private Repo
-                    </span>
-                  ) : (
-                    <a href={project.repo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-300 hover:text-white text-sm font-medium transition-colors hover:bg-slate-800 px-3 py-1.5 rounded-lg -ml-3">
-                      <Github size={20} /> View Code
-                    </a>
-                  )}
-
-                  {project.links.map((link, lIdx) => (
-                    <a key={lIdx} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium hover:underline underline-offset-4">
-                      <ExternalLink size={18} /> {link.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={scrollNext}
+              className="p-3 rounded-full bg-slate-800/50 border border-white/10 text-white hover:bg-blue-600 hover:border-blue-500 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+              aria-label="Next project"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="relative"
+        >
+          {/* Embla Viewport */}
+          <div className="overflow-hidden rounded-3xl" ref={emblaRef}>
+            <div className="flex touch-pan-y cursor-grab active:cursor-grabbing">
+              {projects.map((project, idx) => (
+                <div key={idx} className="min-w-0 flex-[0_0_100%] pl-4 pr-4">
+                  <div className="flex flex-col xl:flex-row gap-8 lg:gap-12 items-center bg-slate-800/40 rounded-3xl p-6 lg:p-10 border border-slate-700/50 shadow-2xl transition-all h-full">
+                    
+                    {/* Project Image Placeholder */}
+                    <div className={`w-full xl:w-1/2 aspect-video rounded-2xl overflow-hidden relative shadow-lg bg-gradient-to-br ${project.imageGradient} border border-white/10 flex items-center justify-center p-8 group shrink-0`}>
+                       <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors duration-500"></div>
+                       <Code2 size={80} className="text-white/50 group-hover:scale-110 group-hover:text-white transition-all duration-500 relative z-10" />
+                       <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-2xl transition-colors duration-500 z-20 pointer-events-none"></div>
+                    </div>
+
+                    {/* Project Content */}
+                    <div className="w-full xl:w-1/2 flex flex-col justify-center">
+                      <div className="flex items-center gap-2 text-blue-400 font-medium mb-4 tracking-wide uppercase text-sm">
+                        <Layers size={16} />
+                        <span>Full Stack Application</span>
+                      </div>
+                      
+                      <h3 className="text-3xl lg:text-4xl font-bold text-white mb-6">{project.title}</h3>
+                      
+                      <div className="text-slate-300 leading-relaxed mb-8 text-lg">
+                        <p className="text-justify">{project.description}</p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-10">
+                        {project.tools.map((tool, tIdx) => (
+                          <span key={tIdx} className="text-sm font-medium text-slate-300 font-mono bg-slate-900/80 px-3 py-1.5 rounded-md border border-slate-700/50 hover:border-slate-500 transition-colors">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-6 mt-auto pt-4 border-t border-slate-700/50">
+                        {project.repo === "private repo" ? (
+                          <span className="flex items-center gap-2 text-slate-500 font-medium cursor-not-allowed" title="Private Repository">
+                            <Github size={22} /> Private Repo
+                          </span>
+                        ) : (
+                          <a href={project.repo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-300 hover:text-white font-medium transition-colors hover:bg-slate-700 px-4 py-2 rounded-lg -ml-4">
+                            <Github size={22} /> View Code
+                          </a>
+                        )}
+
+                        {project.links.map((link, lIdx) => (
+                          <a key={lIdx} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors font-medium hover:underline underline-offset-4">
+                            <ExternalLink size={20} /> {link.name}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="flex justify-center items-center gap-3 mt-10">
+            {projects.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => scrollTo(idx)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  selectedIndex === idx 
+                    ? "bg-blue-500 w-8" 
+                    : "bg-slate-600 hover:bg-slate-400"
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
