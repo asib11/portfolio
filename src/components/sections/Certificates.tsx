@@ -51,18 +51,7 @@ const certificates = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+const marqueeItems = [...certificates, ...certificates, ...certificates];
 
 export default function Certificates() {
   return (
@@ -86,23 +75,25 @@ export default function Certificates() {
           </h2>
           <div className="h-[1px] w-full bg-gradient-to-r from-amber-500/50 to-transparent mt-2 md:mt-0" />
         </div>
+      </div>
 
-        {/* Cards grid */}
+      <div className="w-full relative flex overflow-hidden py-4">
+        {/* Left/Right Fade Gradients */}
+        <div className="absolute top-0 left-0 w-16 md:w-32 h-full bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-16 md:w-32 h-full bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
+        
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
+          className="flex gap-6 w-max pl-6"
+          animate={{ x: ["0%", "-33.333333%"] }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
         >
-          {certificates.map((cert, idx) => (
-            <motion.a
+          {marqueeItems.map((cert, idx) => (
+            <a
               key={idx}
-              variants={itemVariants}
               href={cert.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative flex flex-col gap-4 bg-slate-800/20 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 md:p-7 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-slate-800/40 hover:shadow-2xl ${cert.border} ${cert.glow}`}
+              className={`group relative flex flex-col gap-4 bg-slate-800/20 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 md:p-7 shadow-xl transition-all duration-300 hover:bg-slate-800/40 hover:shadow-2xl w-[320px] md:w-[450px] shrink-0 ${cert.border} ${cert.glow}`}
             >
               {/* Gradient glow on hover */}
               <div
@@ -127,7 +118,7 @@ export default function Certificates() {
               </div>
 
               {/* Title */}
-              <h3 className="text-base md:text-lg font-bold text-white leading-snug group-hover:text-amber-300 transition-colors duration-300 pr-2">
+              <h3 className="text-base md:text-lg font-bold text-white leading-snug group-hover:text-amber-300 transition-colors duration-300 pr-2 flex-grow">
                 {cert.title}
               </h3>
 
@@ -143,7 +134,7 @@ export default function Certificates() {
                   View <ExternalLink size={12} />
                 </span>
               </div>
-            </motion.a>
+            </a>
           ))}
         </motion.div>
       </div>
